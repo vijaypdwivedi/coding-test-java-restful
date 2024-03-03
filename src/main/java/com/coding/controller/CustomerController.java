@@ -16,7 +16,7 @@ public class CustomerController {
     private BookService bookService;
 
     @GetMapping("/get/book/title")
-    public String getBooks(@PathVariable String title) {
+    public String getBooks(@RequestHeader String title) {
 
         Book book = bookService.getBookDetailsByTitle(title);
 

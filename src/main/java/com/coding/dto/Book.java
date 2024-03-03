@@ -6,7 +6,7 @@ public class Book {
     private String author;
     private String category;
     private Double price;
-    private String stockQuantity;
+    private Long stockQuantity;
 
     public Long getId() {
         return id;
@@ -47,11 +47,11 @@ public class Book {
         this.price = price;
     }
 
-    public String getStockQuantity() {
+    public Long getStockQuantity() {
         return stockQuantity;
     }
 
-    public void setStockQuantity(String stockQuantity) {
+    public void setStockQuantity(Long stockQuantity) {
         this.stockQuantity = stockQuantity;
     }
 

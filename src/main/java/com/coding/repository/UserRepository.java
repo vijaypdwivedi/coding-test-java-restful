@@ -6,9 +6,7 @@ import org.apache.ibatis.annotations.Select;
 
 @Mapper
 public interface UserRepository {
-    @Select("SELECT username, password, role FROM users WHERE username = #{username}")
+    @Select("SELECT id, username, password, role FROM users WHERE username = #{username}")
     public UserInfo findByUsername(String username);
-
-
 
 }

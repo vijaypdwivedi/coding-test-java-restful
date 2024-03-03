@@ -1,4 +1,6 @@
 package com.coding.component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -7,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class DatabaseInitializer implements CommandLineRunner {
-
+    private Logger logger = LoggerFactory.getLogger(DatabaseInitializer.class);
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -17,7 +19,7 @@ public class DatabaseInitializer implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
         createUsersTable();
-        //createCategoriesTable();
+        createCategoriesTable();
         //createBooksTable();
         //createShoppingCartsTable();
        // createCartItemsTable();
@@ -29,9 +31,11 @@ public class DatabaseInitializer implements CommandLineRunner {
         String role = "ADMIN";
 
         String encodedPassword = passwordEncoder.encode(password);
-        jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS users (id SERIAL PRIMARY KEY, username VARCHAR(100) UNIQUE NOT NULL, password VARCHAR(255) NOT NULL, role VARCHAR(20) UNIQUE NOT NULL)");
+        //jdbcTemplate.execute("DROP TABLE users");
+        jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS users (id SERIAL PRIMARY KEY, username VARCHAR(100) UNIQUE NOT NULL, password VARCHAR(255) NOT NULL, role VARCHAR(20) NOT NULL)");
         jdbcTemplate.update("DELETE FROM users WHERE username = ?", username);
         jdbcTemplate.update("INSERT INTO users (username, password, role) VALUES (?, ?, ?)", username, encodedPassword, role);
+
     }
 
     private void createBooksTable() {
@@ -40,6 +44,16 @@ public class DatabaseInitializer implements CommandLineRunner {
 
     private void createCategoriesTable() {
         jdbcTemplate.execute("CREATE TABLE IF NOT EXISTS categories (id SERIAL PRIMARY KEY, name VARCHAR(100) UNIQUE NOT NULL)");
+        jdbcTemplate.execute("DELETE FROM categories");
+        jdbcTemplate.execute("INSERT INTO categories (name) VALUES ('biography')");
+        jdbcTemplate.execute("INSERT INTO categories (name) VALUES ('Thriller')");
+        jdbcTemplate.execute("INSERT INTO categories (name) VALUES ('CookBook')");
+        jdbcTemplate.execute("INSERT INTO categories (name) VALUES ('Adventure')");
+        jdbcTemplate.execute("INSERT INTO categories (name) VALUES ('History')");
+        jdbcTemplate.execute("INSERT INTO categories (name) VALUES ('Horror')");
+        jdbcTemplate.execute("INSERT INTO categories (name) VALUES ('Science Fiction')");
+        jdbcTemplate.execute("INSERT INTO categories (name) VALUES ('Classic')");
+        jdbcTemplate.execute("INSERT INTO categories (name) VALUES ('Fantasy')");
     }
 
     private void createShoppingCartsTable() {

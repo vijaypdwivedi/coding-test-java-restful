@@ -1,11 +1,23 @@
 package com.coding.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class BookDetails {
+    private Long id;
     private String title;
     private String author;
     private String category;
     private Double price;
     private String stockQuantity;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getTitle() {
         return title;
@@ -50,10 +62,11 @@ public class BookDetails {
     @Override
     public String toString() {
         return "BookDetails{" +
-                "title='" + title + '\'' +
+                "id=" + id +
+                ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", category='" + category + '\'' +
-                ", price='" + price + '\'' +
+                ", price=" + price +
                 ", stockQuantity='" + stockQuantity + '\'' +
                 '}';
     }

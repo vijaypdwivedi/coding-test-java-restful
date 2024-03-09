@@ -4,7 +4,6 @@ CREATE TABLE IF NOT EXISTS users (
     password VARCHAR(255) NOT NULL,
     role VARCHAR(20) NOT NULL
 );
-INSERT INTO users (username, password, role) VALUES ('admin', 'admin123', 'ADMIN');
 
 CREATE TABLE IF NOT EXISTS books (
     id SERIAL PRIMARY KEY,
@@ -13,7 +12,7 @@ CREATE TABLE IF NOT EXISTS books (
     category_id INT,
     price DECIMAL(10, 2) NOT NULL,
     stock_quantity INT NOT NULL,
-    FOREIGN KEY (category_id) REFERENCES categories(id)
+    FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS categories (
@@ -24,7 +23,7 @@ CREATE TABLE IF NOT EXISTS categories (
 CREATE TABLE IF NOT EXISTS shopping_carts (
     id SERIAL PRIMARY KEY,
     user_id INT,
-    FOREIGN KEY (user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS cart_items (
@@ -32,6 +31,6 @@ CREATE TABLE IF NOT EXISTS cart_items (
     cart_id INT,
     book_id INT,
     quantity INT NOT NULL,
-    FOREIGN KEY (cart_id) REFERENCES shopping_carts(id),
-    FOREIGN KEY (book_id) REFERENCES books(id)
+    FOREIGN KEY (cart_id) REFERENCES shopping_carts(id) ON DELETE CASCADE,
+    FOREIGN KEY (book_id) REFERENCES books(id) ON DELETE CASCADE
 );

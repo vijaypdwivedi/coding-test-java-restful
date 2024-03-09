@@ -1,5 +1,8 @@
 package com.coding.dto;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class Book {
     private Long id;
     private String title;

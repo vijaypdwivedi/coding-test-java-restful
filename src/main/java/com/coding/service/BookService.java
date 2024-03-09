@@ -2,10 +2,12 @@ package com.coding.service;
 import com.coding.dto.Book;
 import com.coding.entity.BookDetails;
 
+import java.util.List;
+
 public interface BookService {
     public String addBookStock(BookDetails bookDetails);
-    public void updateBookStock();
-    public void removeBookFromStock();
-    public Book getBookDetailsByTitle(String title);
+    public String updateBookStock(BookDetails bookDetails);
+    public String removeBookFromStock(Long bookId);
+    public List<Book> getBookDetailsByTitle(String title);
 
 }

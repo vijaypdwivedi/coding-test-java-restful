@@ -15,6 +15,7 @@ public class Book {
     public void setId(Long id) {
         this.id = id;
     }
+
     public String getTitle() {
         return title;
     }
@@ -62,8 +63,8 @@ public class Book {
                 ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", category='" + category + '\'' +
-                ", price='" + price + '\'' +
-                ", stockQuantity='" + stockQuantity + '\'' +
+                ", price=" + price +
+                ", stockQuantity=" + stockQuantity +
                 '}';
     }
 }

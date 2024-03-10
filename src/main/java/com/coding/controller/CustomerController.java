@@ -23,6 +23,9 @@ public class CustomerController {
     @Autowired
     private BookService bookService;
 
+    @Autowired
+    private ShoppingCartService shoppingCartService;
+
     // Endpoint to get book details by title
     @GetMapping("/get/book/title/{title}")
     @PreAuthorize("hasRole('USER''ADMIN')")
@@ -38,9 +41,6 @@ public class CustomerController {
         return ResponseEntity.status(HttpStatus.OK).body(book);
     }
 
-
-    @Autowired
-    private ShoppingCartService shoppingCartService;
 
     @PostMapping("/add/shopping/cart")
     @PreAuthorize("hasAnyRole('USER', 'ADMIN')")

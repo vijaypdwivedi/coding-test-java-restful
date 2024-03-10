@@ -14,8 +14,10 @@ public interface BookRepository {
     public void updateBookDetails(BookDetails bookDetails);
     @Delete("DELETE FROM books  WHERE id = #{bookId}")
     public void removeBookDetails(Long bookId);
-    @Select("SELECT id, title,author,price,stock_quantity as stockQuantity FROM books WHERE title = #{title}")
+    @Select("SELECT id, title,author,category_id as category,price,stock_quantity as stockQuantity FROM books WHERE title = #{title}")
     public List<Book> getBookDetailsByTitle(String title);
+    @Select("SELECT id, title,author,category_id as category,price,stock_quantity as stockQuantity FROM books  WHERE category_id = #{category}")
+    public List<Book> getBookDetailsByCategory(String title);
     @Select("SELECT id, title,author,price, category_id as category,stock_quantity as stockQuantity FROM books WHERE id = #{bookId}")
     public Book findBookDetailsById(Long bookId);
 

@@ -75,8 +75,17 @@ public class BookServiceImpl implements BookService {
     // Method to get book details by title
     @Override
     public List<Book> getBookDetailsByTitle(String title) {
-        // Retrieve book details from the database by title
-        List<Book> book = bookRepository.getBookDetailsByTitle(title);
+        List<Book>  book = null;
+        try {
+            // Retrieve book details from the database by title
+            book = bookRepository.getBookDetailsByTitle(title);
+        } catch (Exception exception) {
+            // Log error message and throw ServiceException
+            logger.error("Failed to fetch book details from database: ErrorMessage{}", exception.getMessage());
+            throw new ServiceException(Constant.dbErrorCode, exception.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+        // Log success message
+        logger.info("Book details fetched from database: {}", book);
         return book;
     }
 }

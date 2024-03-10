@@ -1,6 +1,8 @@
 package com.coding.controller;
 
+import com.coding.dto.UserInfo;
 import com.coding.entity.BookDetails;
+import com.coding.entity.User;
 import com.coding.exception.ServiceException;
 import com.coding.service.BookService;
 import org.slf4j.Logger;
@@ -66,4 +68,22 @@ public class AdminController {
             return ResponseEntity.status(serviceException.getHttpStatus()).body(serviceException.getErrorMessage());
         }
     }
+
+    // Endpoint to add book details
+    @PostMapping("/add/user")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity registerUser(@RequestBody User user) {
+        logger.info("Process to register user: {}", user);
+        String response = null;
+        try {
+            // Call service method to add book details
+            response = bookService.addUser(user);
+        } catch (ServiceException serviceException) {
+            // Handle service exception and return error response
+            return ResponseEntity.status(serviceException.getHttpStatus()).body(serviceException.getErrorMessage());
+        }
+        // Return success response
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
+    }
+
 }

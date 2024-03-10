@@ -31,7 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.authorizeRequests()
-                .antMatchers("/v1/**","/h2/**").hasRole("ADMIN") // Restrict access to admin endpoints
+                .antMatchers("/v1/admin/**").hasRole("ADMIN") // Restrict access to admin endpoints
+                .antMatchers("/v1/customer/**").hasRole("USER") // Restrict access to customer endpoints
                 .anyRequest().authenticated()
                 .and()
                 .httpBasic();
